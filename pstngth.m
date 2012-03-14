@@ -3,7 +3,7 @@ function [ pstvals pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 %a matrix X with N rows and M columns, CLUSTERS is the maximum number of
 %different clusters that will be tested, by default starts on 2 and ends in
 %CLUSTERS, each number of clusters will be tried for TRIALS times.
-%The distance measuere used is the correlation distance.
+%The distance measure used is the correlation distance.
 %
 %PSTNGTH(X, CLUSTERS, TRIALS): Provide a plot of the prediction strength
 %values for the values in CLUSTERS, with the mean and standard deviation of
@@ -32,7 +32,7 @@ function [ pstvals pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 % file or see the last part of this file.
 % Written by Yoshiki Vazquez Baeza
 % email: yoshiki89@gmail.com
-% Version 1.0 March 2012
+% Version 1.0.1 March 2012
 
 if nargin == 3
     showPlot=false;
@@ -97,8 +97,8 @@ end
 
 %Returning just the ideal number of clusters
 if nargout == 1
-    [val pos]=max(min(resmat(2:end,:)'));
-    pstvals=pos;
+    [val pos]=max(mean(resmat(2:end,:)'));
+    pstvals=pos+1;
     return;
 end
 
@@ -109,7 +109,7 @@ if nargout > 1
     pstsdv=std(resmat');
     
     %The values for the prediction strength is the minimum of all the trials
-    pstvals=min(resmat');
+    pstvals=mean(resmat');
 end
 
 end
