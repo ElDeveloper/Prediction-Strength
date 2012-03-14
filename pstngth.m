@@ -64,14 +64,14 @@ for cluster=2:clusters
         training=outcell{2};
         
         %Cluster the test group and the training group
-        [idxte ctrte]=kmeans(test,cluster,'distance','correlation','replicates',ITERATIONS,'emptyaction','singleton','disp','final');
-        [idxtr ctrtr]=kmeans(training, cluster, 'distance', 'correlation', 'replicates', ITERATIONS, 'emptyaction', 'singleton', 'disp', 'final');
+        [idxte ctrte]=kmeans(test, cluster, 'distance', 'correlation', 'replicates', ITERATIONS, 'emptyaction', 'singleton');
+        [idxtr ctrtr]=kmeans(training, cluster, 'distance', 'correlation', 'replicates', ITERATIONS, 'emptyaction', 'singleton');
         
         %Reference matrix for the test clustering 
         temat=samat(idxte);
         
         %Cluster the test data with the training centroids
-        [idxps ctrps]=kmeans(test, cluster,'emptyaction','singleton','disp','final','start',ctrtr);
+        [idxps ctrps]=kmeans(test, cluster, 'emptyaction', 'singleton', 'start', ctrtr);
         psmat=samat(idxps);
         
         %For all the points that are in the same position sum one and
@@ -97,6 +97,7 @@ end
 
 %Returning just the ideal number of clusters
 if nargout == 1
+    %Add an offset of 1 to fix removing the first row
     [val pos]=max(mean(resmat(2:end,:)'));
     pstvals=pos+1;
     return;
