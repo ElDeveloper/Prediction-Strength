@@ -1,4 +1,4 @@
-function [ pstvals pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
+function [ numclus pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 %PSTNGTH Calculates the prediction strength using the k-means algorithm for
 %a matrix X with N rows and M columns, CLUSTERS is the maximum number of
 %different clusters that will be tested, by default starts on 2 and ends in
@@ -12,11 +12,10 @@ function [ pstvals pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 %[NUMCLUS]=PSTNGHT(X, CLUSTERS, TRIALS): Provides the ideal number of
 %clusters NUMCLUS as suggested by the prediction strength algorithm.
 %
-%[PSTVALS PSTMEAN PSTSDV]=PSTNGTH(X, CLUSTERS, TRIALS): Provide a vector
-%containing the values of the prediction strength for each of the proposed
-%number of clusters, a vector containing the mean PSTMEAN and standard 
-%deviation PSTSDV of all the TRIALS for each of the proposed number of 
-%clusters.
+%[NUMCLUS PSTMEAN PSTSDV]=PSTNGTH(X, CLUSTERS, TRIALS): Provides the
+%suggested number of clusters NUMCLUS, a vector containing the mean PSTMEAN
+%and a vector containing the standard deviation PSTSDV resulting for all
+%the trials in each proposed number of clusters.
 %
 %[...]=PSTNGTH(.., SHOWPLOT): Whether or not you want to show the plot and
 %receive any extra arguments as a return of the function
@@ -32,7 +31,7 @@ function [ pstvals pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 % file or see the last part of this file.
 % Written by Yoshiki Vazquez Baeza
 % email: yoshiki89@gmail.com
-% Version 1.0.1 March 2012
+% Version 1.0.2 March 2012
 
 if nargin == 3
     showPlot=false;
@@ -96,11 +95,10 @@ if nargout == 0 || showPlot
 end
 
 %Returning just the ideal number of clusters
-if nargout == 1
+if nargout >= 1
     %Add an offset of 1 to fix removing the first row
     [val pos]=max(mean(resmat(2:end,:)'));
-    pstvals=pos+1;
-    return;
+    numclus=pos+1;
 end
 
 %Return the vectors
@@ -108,9 +106,6 @@ if nargout > 1
     %Calculate the mean and the standard deviation
     pstmean=mean(resmat');
     pstsdv=std(resmat');
-    
-    %The values for the prediction strength is the minimum of all the trials
-    pstvals=mean(resmat');
 end
 
 end
