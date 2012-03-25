@@ -173,7 +173,7 @@ for y=1:height
         end
     end
 end
-
+end
 % Copyright (c) 2012 Yoshiki Vazquez Baeza http://yoshikee.tumblr.com
 % Permission is hereby granted, free of charge, to any person obtaining
 % a copy of this software and associated documentation files (the
