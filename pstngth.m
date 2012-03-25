@@ -109,6 +109,71 @@ if nargout > 1
 end
 
 end
+
+function [ outcell ] = divmat( matrix, pieces )
+%DIVMAT Randomly divides a matrix into PIECES parts and stores each part 
+%inside each index of the cell OUTCELL, OUTCELL will have as many indexes
+%as stated by PIECES.
+
+% Released under the MIT License, for further information see the README
+% file or see the last part of this file.
+% Written by Yoshiki Vazquez Baeza
+% email: yoshiki89@gmail.com
+% Version 1.0 March 2012
+
+[height, width]=size(matrix);
+
+%Randomized order
+ranrows=randperm(height);
+
+%Keep track of all the rows you have randomly split
+divided=1;
+subsize=floor(height/pieces);
+chunk=subsize;
+
+%Split piece by piece
+for index=1:pieces
+    
+    %In all the divisions increase linearly the size ...
+    if index ~= pieces
+        outcell{index}=matrix(ranrows(divided:chunk),:);
+    %Except in the last division, just store everything there
+    else
+        outcell{index}=matrix(ranrows(divided:end),:);
+    end
+    
+    %Update the tracking values
+    divided=divided+subsize;
+    chunk=chunk+subsize;
+
+end
+
+end
+
+function [ omat ] = samat( indexes )
+%SAMAT Creates a matrix based on INDEXES, where each of the values
+%correspond to a cluster, summarizes in the upper side of OMAT the pairs of
+%rows that are in the same cluster.
+
+% Released under the MIT License, for further information see the README
+% file or see the last part of this file.
+% Written by Yoshiki Vazquez Baeza
+% email: yoshiki89@gmail.com
+% Version 1.0 March 2012
+
+height=length(indexes);
+omat=zeros(height,height);
+
+%Go through every row but not through every column
+for y=1:height
+    for x=(y+1):height
+        %If the indexes are on the same cluster set that crossroad to one
+        if indexes(y) == indexes(x)
+            omat(y,x)=1;
+        end
+    end
+end
+
 % Copyright (c) 2012 Yoshiki Vazquez Baeza http://yoshikee.tumblr.com
 % Permission is hereby granted, free of charge, to any person obtaining
 % a copy of this software and associated documentation files (the
