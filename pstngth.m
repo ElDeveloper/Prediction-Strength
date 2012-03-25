@@ -54,8 +54,8 @@ if height*0.5 < clusters
     error('PSTNGTH:The value of CLUSTERS is too big, try with a smaller value.');
 end
 
-%For each cluster run a certain number of trials
-for cluster=2:clusters
+%For each cluster run a certain number of trials, the algorithm can be run in parallel
+parfor cluster=2:clusters
     for trial=1:trials
         %Generate two random arrays from the data matrix
         [outcell]=divmat(X,2);
