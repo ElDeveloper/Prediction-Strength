@@ -31,7 +31,7 @@ function [ numclus pstmean pstsdv ] = pstngth( X, clusters, trials, showPlot)
 % file or see the last part of this file.
 % Written by Yoshiki Vazquez Baeza
 % email: yoshiki89@gmail.com
-% Version 1.0.2 March 2012
+% Version 1.1 March 2012
 
 if nargin == 3
     showPlot=false;
@@ -119,7 +119,7 @@ function [ outcell ] = divmat( matrix, pieces )
 % file or see the last part of this file.
 % Written by Yoshiki Vazquez Baeza
 % email: yoshiki89@gmail.com
-% Version 1.0 March 2012
+% Version 1.1 March 2012
 
 [height, width]=size(matrix);
 
@@ -159,7 +159,7 @@ function [ omat ] = samat( indexes )
 % file or see the last part of this file.
 % Written by Yoshiki Vazquez Baeza
 % email: yoshiki89@gmail.com
-% Version 1.0 March 2012
+% Version 1.1 March 2012
 
 height=length(indexes);
 omat=zeros(height,height);

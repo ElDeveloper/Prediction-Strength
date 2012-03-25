@@ -7,6 +7,12 @@ Implementation in MATLAB of the prediction strength algorithm described in: R. T
 If you have a question or suggestion, you can reach me on my twitter:
 http://www.twitter.com/yosmark
 
+#Usage
+
+Add the file pstngth.m to your current path in MATLAB or to your MATLAB path.
+
+See the script psexample for a sample of the usage.
+
 #License
 
 Copyrigth (c) 2012 Yoshiki Vázquez Baeza, http://yoshikee.tumblr.com
